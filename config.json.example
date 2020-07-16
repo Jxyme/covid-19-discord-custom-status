@@ -1,6 +1,6 @@
 {
     "token": "YOUR_DISCORD_USER_TOKEN_GOES_HERE",
-    "country": "uk",
-    "emojiID": null,
-    "emojiName": "🇬🇧"
+    "country": "ENTER_YOUR_COUNTRY_CODE_HERE",
+    "emojiID": "NITRO_EMOJI_ID",
+    "emojiName": "EMOJI_NAME"
 }
