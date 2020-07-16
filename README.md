@@ -18,6 +18,8 @@ Please use this at your own risk. I do **not** take responsibility if your accou
 ## Requirements
 [NodeJS](https://nodejs.org/en/download/)
 
+[Discord User Token](https://github.com/Tyrrrz/DiscordChatExporter/wiki/Obtaining-Token-and-Channel-IDs#how-to-get-a-user-token)
+
 ## Usage Instructions
 1. Download and install [NodeJS](https://nodejs.org/en/download/).
 
