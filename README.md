@@ -9,7 +9,7 @@ Automatically adjust your Discord Custom Status with the latest COVID-19 Statist
 **[Example](#custom-status-example)**
 
 ## Warning
-This techincally falls under a "self-bot" since it does use your Discord token to make an API request on the User Settings endpoint.
+This techincally falls under a "[self-bot](https://support.discord.com/hc/en-us/articles/115002192352-Automated-user-accounts-self-bots-)" since it uses your Discord token to make an API request on the User Settings endpoint.
 
 The application will **only** edit your Custom Status when it detects changes, not every time new figures are fetched.
 
@@ -45,11 +45,11 @@ Please use this at your own risk. I do **not** take responsibility if your accou
 ```
 
 ## Examples
+
+### Support for ordinary Emoji's
 Below you'll find two examples, one for ordinary Emoji's (Discord) and Custom Emoji's. You do **NOT** need to include the `:`'s.
 
 For example, if you want to use the :mask: emoji, you only need to provide `mask` as the `emojiName` and set `emojiID` to `null`.
-
-### Support for ordinary Emoji's
 
 ```json
 {
@@ -76,6 +76,17 @@ Once you've sent the Emoji in Discord you'll see a result like so `<:covid19:693
 
 ## Custom Status Example
 
-### Statistics for Thursday, 16th of July in the United Kingdom. ([Source](https://coronavirus.data.gov.uk/))
+### `data.json`
+```json
+{
+    "cases": 292552,
+    "todayCases": 642,
+    "deaths": 45119,
+    "todayDeaths": 66,
+    "recovered": 0
+}
+```
 
-![Thursday 16th July](https://i.jayme.dev/kVGajf8.png)
+### Statistics for Thursday, 16th of July in the United Kingdom. ([Source](https://www.worldometers.info/coronavirus/country/uk/))
+
+![Thursday 16th July](https://i.jayme.dev/CSWqEk1.png)
