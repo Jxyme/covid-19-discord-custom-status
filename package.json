@@ -1,6 +1,6 @@
 {
   "name": "covid-19-custom-status",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically adjust your Discord Custom Status with the latest COVID Statistics.",
   "main": "index.js",
   "scripts": {
