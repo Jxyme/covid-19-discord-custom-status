@@ -79,6 +79,7 @@ Once you've sent the Emoji in Discord you'll see a result like so `<:covid19:693
 ### `data.json`
 ```json
 {
+    "updated": 1594873932000,
     "cases": 292552,
     "todayCases": 642,
     "deaths": 45119,

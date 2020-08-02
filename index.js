@@ -11,7 +11,7 @@ const PROCESS = chalk.hex("#FFA500");
 const INFO = chalk.hex("#FF68F4");
 const LOG = chalk.hex("#35B8FF");
 
-const SURL = "https://discordapp.com/api/v6/users/@me/settings";
+const SURL = "https://discord.com/api/v6/users/@me/settings";
 
 setInterval(compareStats, 60000);
 
@@ -130,25 +130,33 @@ function compareStats() {
         if (err) {
             console.log(ERROR(err));
         } else {
-            try {
-                if (stats.cases != data.body.cases && data.body.cases != undefined || stats.todayCases != data.body.todayCases && data.body.todayCases != undefined ||
-                    stats.deaths != data.body.deaths && data.body.deaths != undefined || stats.todayDeaths != data.body.todayDeaths && data.body.todayDeaths != undefined) {
-                    let coronaData = {
-                        cases: data.body.cases,
-                        todayCases: data.body.todayCases,
-                        deaths: data.body.deaths,
-                        todayDeaths: data.body.todayDeaths,
-                        recovered: data.body.recovered
-                    };
-                    let newData = JSON.stringify(coronaData, null, 4);
-                    fs.writeFileSync('./data.json', newData)
-                    console.log(LOG("[NEW] " + INFO("Figures have updated to: " + formatNumber(data.body.todayCases) + " Cases & " + formatNumber(data.body.todayDeaths) + " Deaths")));
-                    doRequest();
-                } else {
-                    return;
+            let newestDate = Math.max(stats.updated, data.body.updated); /* Compare two dates and store the most recent in 'newestDate' */
+            if (newestDate <= stats.updated) { /* If newestDate is less or equal to the value in 'data.json' */
+                return; /* If yes, return */
+            } else {
+                stats.updated = newestDate; /* Set the 'updated' value to newestDate */
+                fs.writeFileSync('./data.json', JSON.stringify(stats, null, 2)); /* Write the value to file */
+                try {
+                    if (stats.cases != data.body.cases && data.body.cases != undefined || stats.todayCases != data.body.todayCases && data.body.todayCases != undefined ||
+                        stats.deaths != data.body.deaths && data.body.deaths != undefined || stats.todayDeaths != data.body.todayDeaths && data.body.todayDeaths != undefined) {
+                        let coronaData = {
+                            updated: newestDate,
+                            cases: data.body.cases,
+                            todayCases: data.body.todayCases,
+                            deaths: data.body.deaths,
+                            todayDeaths: data.body.todayDeaths,
+                            recovered: data.body.recovered
+                        };
+                        let newData = JSON.stringify(coronaData, null, 4);
+                        fs.writeFileSync('./data.json', newData)
+                        console.log(LOG("[NEW] " + INFO("Figures have updated to: " + formatNumber(data.body.todayCases) + " Cases & " + formatNumber(data.body.todayDeaths) + " Deaths")));
+                        doRequest();
+                    } else {
+                        return;
+                    }
+                } catch (err) {
+                    console.error(err);
                 }
-            } catch (err) {
-                console.error(err);
             }
         }
     });
