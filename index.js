@@ -81,10 +81,38 @@ console.error = function () {
 /* Start the Application and Check for Updates */
 
 console.log(SUCCESS("Application started successfully."));
-console.log(PROCESS("Fetching latest figures from NovelCOVID API..."));
-compareStats();
+statusCheck();
 
 /* PATCH request to Discord User, set Custom Status from provided text, emoji_id and emoji_name */
+
+function statusCheck() {
+    return new Promise((resolve, reject) => {
+        request({
+            method: "GET",
+            uri: SURL,
+            headers: {
+                Authorization: config.token
+            },
+            json: true
+        }, (err, res) => {
+            if (err) {
+                reject(ERROR("[ERROR] " + err));
+                return;
+            }
+            if (res.statusCode !== 200) {
+                reject(new Error(ERROR("[ERROR] Invalid Status Code: " + res.statusCode)));
+                return;
+            }
+            resolve(true);
+            let status = res.body.custom_status;
+            if(status.emoji_id !== config.emojiID || status.emoji_name !== config.emojiName) {
+                doRequest(); /* Update Custom Status */
+            } else {
+                compareStats(); /* Fetch figures from API as normal */
+            }
+        });
+    });
+}
 
 function doRequest() {
     let data = fs.readFileSync('./data.json', 'utf8');
