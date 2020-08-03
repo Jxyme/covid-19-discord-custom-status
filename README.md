@@ -47,16 +47,18 @@ Please use this at your own risk. I do **not** take responsibility if your accou
 ## Examples
 
 ### Support for ordinary Emoji's
-Below you'll find two examples, one for ordinary Emoji's (Discord) and Custom Emoji's. You do **NOT** need to include the `:`'s.
+Below you'll find two examples, one for ordinary Emoji's (Discord) and Custom Emoji's. (Nitro Classic and Nitro)
 
-For example, if you want to use the :mask: emoji, you only need to provide `mask` as the `emojiName` and set `emojiID` to `null`.
+For example, if you want to use the :mask: emoji, you need to set the emoji's [character](https://emojipedia.org/emoji/%F0%9F%98%B7/) as the `emojiName` and set `emojiID` to `null`.
+
+You can use [Emojipedia](https://emojipedia.org/) to search for the emoji of your choice and Copy & Paste it's character into the `emojiName` field.
 
 ```json
 {
     "token": "YOUR_DISCORD_USER_TOKEN_GOES_HERE",
     "country": "uk",
     "emojiID": null,
-    "emojiName": "mask"
+    "emojiName": "😷"
 }
 ```
 
