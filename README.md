@@ -1,17 +1,18 @@
 # covid-19-discord-custom-status
-Automatically adjust your Discord Custom Status with the latest COVID-19 Statistics. (Country Specific)
+Automatically adjust your Discord Custom Status with the latest COVID-19 Figures. (Country Specific)
 
 ### Table of Contents
 **[Warning](#warning)**<br>
 **[Requirements](#requirements)**<br>
 **[Usage Instructions](#usage-instructions)**<br>
-**[Configuration](#examples)**<br>
+**[Configuration](#configuration-breakdown)**<br>
+**[Breakdown](#breakdown)**<br>
 **[Example](#custom-status-example)**
 
 ## Warning
-This techincally falls under a "[self-bot](https://support.discord.com/hc/en-us/articles/115002192352-Automated-user-accounts-self-bots-)" since it uses your Discord token to make an API request on the User Settings endpoint.
+This technically falls under a "[self-bot](https://support.discord.com/hc/en-us/articles/115002192352-Automated-user-accounts-self-bots-)" since it uses your Discord token to make an API request on the User Settings endpoint.
 
-The application will **only** edit your Custom Status when it detects changes, not every time new figures are fetched.
+The application will **only** edit your custom status when it detects changes, not every time new figures are fetched.
 
 Please use this at your own risk. I do **not** take responsibility if your account gets banned. :rotating_light:
 
@@ -38,13 +39,37 @@ Please use this at your own risk. I do **not** take responsibility if your accou
 ```json
 {
     "token": "YOUR_DISCORD_USER_TOKEN_GOES_HERE",
+    "showYesterday": "TRUE_OR_FALSE_WITHOUT_QUOTES",
     "country": "ENTER_YOUR_COUNTRY_CODE_HERE",
     "emojiID": "NITRO_EMOJI_ID",
-    "emojiName": "EMOJI_NAME"
+    "emojiName": "EMOJI_NAME",
+    "suffix": "ANYTHING TYPED HERE WILL BE DISPLAYED AFTER THE FIGURES (MAX 75 CHARS)"
 }
 ```
 
-## Examples
+## Breakdown
+
+### Display Today's Figures
+Your custom status will be updated with the latest figures for today, even if they're equal to `0` Cases & `0` Deaths. (e.g. a new day)
+
+### Display Yesterday's Figures (as of 1.0.2)
+Between 00:00 - 03:00 GMT+0 yesterday's figures will be fetched, upon detecting new figures, your custom status will be updated.
+
+Once today's figures have been released, your custom status will update once more, displaying the latest figures for today.
+
+***Please note, yesterday's figures reset after midnight GMT+0, thereabouts. Figures are provided by Worldometers. ([Source](https://www.worldometers.info/coronavirus/))***
+
+### Custom Status Detection (as of 1.0.2)
+When you start the application a number of checks will be made to ensure your custom status is always up to date.
+
+Previously, if you were to modify the `emojiID`, `emojiName` or even disable the custom status you'd have to wait for new figures.
+
+Now, disabling the custom status and/or modifying the config will detect a change and update your custom status accordingly.
+
+***Please note, the custom status Detection only runs once at start up so you will need to restart the application manually.***
+
+### Suffix (as of 1.0.2)
+Add a unique suffix to your custom status. (e.g. **Today: 23,254 Cases & 162 Deaths** → **Today: 23,254 Cases & 162 Deaths — jayme.dev**)
 
 ### Support for ordinary Emoji's
 Below you'll find two examples, one for ordinary Emoji's (Discord) and Custom Emoji's. (Nitro Classic and Nitro)
@@ -56,23 +81,27 @@ You can use [Emojipedia](https://emojipedia.org/) to search for the emoji of you
 ```json
 {
     "token": "YOUR_DISCORD_USER_TOKEN_GOES_HERE",
+    "showYesterday": true,
     "country": "uk",
     "emojiID": null,
-    "emojiName": "😷"
+    "emojiName": "😷",
+    "suffix": "— jayme.dev"
 }
 ```
 
 ### Custom Emoji's (Nitro Classic and Nitro)
 In order to receive the `emojiID` and `emojiName`, type `\` followed by the Nitro Emoji. For example, `\:covid19:` and press `ENTER`.
 
-Once you've sent the Emoji in Discord you'll see a result like so `<:covid19:693518580016218122>` which'll be used in the `.json`.
+Once you've sent the Emoji in Discord you'll see a result like so `<:covid19:693518580016218122>` which will be used in the `.json`.
 
 ```json
 {
     "token": "YOUR_DISCORD_USER_TOKEN_GOES_HERE",
+    "showYesterday": true,
     "country": "united%20kingdom",
     "emojiID": "693518580016218122",
-    "emojiName": "covid19"
+    "emojiName": "covid19",
+    "suffix": "— jayme.dev"
 }
 ```
 
@@ -81,15 +110,27 @@ Once you've sent the Emoji in Discord you'll see a result like so `<:covid19:693
 ### `data.json`
 ```json
 {
-    "updated": 1594873932000,
-    "cases": 292552,
-    "todayCases": 642,
-    "deaths": 45119,
-    "todayDeaths": 66,
-    "recovered": 0
+    "today": {
+        "cases": 1034914,
+        "todayCases": 23254,
+        "deaths": 46717,
+        "todayDeaths": 162,
+        "recovered": 0,
+        "updated": 1604257092486
+    },
+    "yesterday": {
+        "cases": 1011660,
+        "todayCases": 21915,
+        "deaths": 46555,
+        "todayDeaths": 326,
+        "recovered": 0,
+        "updated": 1604257093392
+    },
+    "country": "uk",
+    "suffix": "— jayme.dev"
 }
 ```
 
-### Statistics for Thursday, 16th of July in the United Kingdom. ([Source](https://www.worldometers.info/coronavirus/country/uk/))
+### Figures for 01/11/2020 (today) and 31/10/2020 (yesterday) in the United Kingdom. ([Source](https://www.worldometers.info/coronavirus/country/uk/))
 
-![Thursday 16th July](https://i.jayme.dev/CSWqEk1.png)
+![Figures](https://i.jayme.dev/WzblSRs.png)
