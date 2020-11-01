@@ -1,6 +1,8 @@
 {
     "token": "YOUR_DISCORD_USER_TOKEN_GOES_HERE",
+    "showYesterday": "TRUE_OR_FALSE_WITHOUT_QUOTES",
     "country": "ENTER_YOUR_COUNTRY_CODE_HERE",
     "emojiID": "NITRO_EMOJI_ID",
-    "emojiName": "EMOJI_NAME"
+    "emojiName": "EMOJI_NAME",
+    "suffix": "ANYTHING TYPED HERE WILL BE DISPLAYED AFTER THE FIGURES (MAX 75 CHARS)"
 }
