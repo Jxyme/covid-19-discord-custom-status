@@ -95,7 +95,7 @@ onStartup();
 function onStartup() {
     initialTasks[i++]();
     if (i < initialTasks.length) {
-        setTimeout(onStartup, 1500);
+        setTimeout(onStartup, 5000); // 5 seconds
     }
 }
 
@@ -125,7 +125,7 @@ let yesterdayTasks = [fetchToday, fetchYesterday, handleFigures],
 function checkYesterday() {
     yesterdayTasks[y++]();
     if (y < yesterdayTasks.length) {
-        setTimeout(checkYesterday, 1500);
+        setTimeout(checkYesterday, 5000); // 5 seconds
     }
 }
 
@@ -137,7 +137,7 @@ let todayTasks = [fetchToday, handleFigures],
 function checkToday() {
     todayTasks[t++]();
     if (t < todayTasks.length) {
-        setTimeout(checkToday, 1500);
+        setTimeout(checkToday, 5000); // 5 seconds
     }
 }
 
@@ -211,9 +211,9 @@ function fetchToday() {
                 localData.today.updated = newestDate;
                 fs.writeFileSync('./data.json', JSON.stringify(localData, null, 4));
                 try {
-                    if (localData.today.cases != apiData.cases || localData.today.todayCases != apiData.todayCases ||
-                        localData.today.deaths != apiData.deaths || localData.today.todayDeaths != apiData.todayDeaths ||
-                        localData.today.recovered != apiData.recovered) {
+                    if (localData.today.cases !== apiData.cases && apiData.cases !== undefined || localData.today.todayCases !== apiData.todayCases && apiData.todayCases !== undefined ||
+                        localData.today.deaths !== apiData.deaths && apiData.deaths !== undefined || localData.today.todayDeaths !== apiData.todayDeaths && apiData.todayDeaths !== undefined ||
+                        localData.today.recovered !== apiData.recovered && apiData.recovered !== undefined) {
                         for (let key in localData.today) {
                             localData.today[key] = apiData[key];
                         }
@@ -250,9 +250,9 @@ function fetchYesterday() {
                 localData.yesterday.updated = newestDate;
                 fs.writeFileSync('./data.json', JSON.stringify(localData, null, 4));
                 try {
-                    if (localData.yesterday.cases != apiData.cases || localData.yesterday.todayCases != apiData.todayCases ||
-                        localData.yesterday.deaths != apiData.deaths || localData.yesterday.todayDeaths != apiData.todayDeaths ||
-                        localData.yesterday.recovered != apiData.recovered) {
+                    if (localData.yesterday.cases !== apiData.cases && apiData.cases !== undefined || localData.yesterday.todayCases !== apiData.todayCases && apiData.todayCases !== undefined ||
+                        localData.yesterday.deaths !== apiData.deaths && apiData.deaths !== undefined || localData.yesterday.todayDeaths !== apiData.todayDeaths && apiData.todayDeaths !== undefined ||
+                        localData.yesterday.recovered !== apiData.recovered && apiData.recovered !== undefined) {
                         for (let key in localData.yesterday) {
                             localData.yesterday[key] = apiData[key];
                         }
@@ -351,4 +351,4 @@ function resetLocalData() {
 
 function formatNumber(figure) {
     return figure.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-}
+}   
