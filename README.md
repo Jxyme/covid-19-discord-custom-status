@@ -133,4 +133,6 @@ Once you've sent the Emoji in Discord you'll see a result like so `<:covid19:693
 
 ### Figures for 01/11/2020 (today) and 31/10/2020 (yesterday) in the United Kingdom. ([Source](https://www.worldometers.info/coronavirus/country/uk/))
 
-![Figures](https://i.jayme.dev/WzblSRs.png)
+![Today](https://raw.githubusercontent.com/Jxyme/covid-19-discord-custom-status/master/screenshots/woN6XcmP.png)
+
+![Yesterday](https://raw.githubusercontent.com/Jxyme/covid-19-discord-custom-status/master/screenshots/LDOWC6H0.png)
