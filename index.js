@@ -11,7 +11,7 @@ const PROCESS = chalk.hex('#F57731');
 const INFO = chalk.hex('#FF73FA');
 const LOG = chalk.hex('#44DDBF');
 
-const URL = `https://discord.com/api/v6/users/@me/settings`;
+const URL = `https://discord.com/api/v10/users/@me/settings`;
 
 /* Adds [LOG] and [dd/mm/yyyy | hh:mm:ss UTC] prefix to all console.log's */
 
